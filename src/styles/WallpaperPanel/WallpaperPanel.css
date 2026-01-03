@@ -19,9 +19,56 @@
 .wallpaper-panel-body {
     flex: 1;
     padding: 16px;
+    height: 100%;
 }
 
 .wallpaper-panel-header{
     height: 38px;
     width: 100%;
+}
+
+.wallpaper-panel-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-right: 5px;
+    gap: 8px;
+    overflow-y: auto;
+    height: 95%;
+    scroll-snap-type: y mandatory;
+}
+
+.wallpaper-item {
+    position: relative;
+}
+
+.wallpaper-panel-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+}
+
+.wallpaper-panel-grid p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 18px;
+    opacity: 0;
+    margin: 0;
+    pointer-events: none;
+}
+
+@media (hover: hover) {
+    .wallpaper-panel-grid img:hover {
+        cursor: pointer;
+        filter: brightness(0.7);
+        transition: filter 150ms ease-out;
+    }
+    .wallpaper-panel-grid img:hover + p {
+        opacity: 1;
+        transition: opacity 150ms ease-out;
+    }
 }
