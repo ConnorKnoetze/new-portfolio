@@ -12,7 +12,7 @@ export default function NavContent(){
         // Function to update time and date
         const updateDateTime = () => {
             const now = new Date();
-            const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true }).toLowerCase();
             const date = now.toLocaleDateString();
             setCurrentTime(time);
             setCurrentDate(date);
@@ -26,9 +26,6 @@ export default function NavContent(){
         return () => clearInterval(interval);
     }, []);
 
-    const hours = new Date().getHours();
-    const period = hours < 12 ? 'am' : 'pm';
-
     // Toggle tray open/close state
     const handleTrayClick = () => {
         setIsRotated(!isRotated);
@@ -36,7 +33,7 @@ export default function NavContent(){
     };
 
     return (
-        <nav className="w-full bg-[color-mix(in_srgb,var(--color-blue-500),transparent_95%)] backdrop-blur-lg border-t border-[color-mix(in_srgb,var(--color-blue-500),transparent_95%)] saturate-150">
+        <nav className="w-full bg-[color-mix(in_srgb,var(--color-gray-950),transparent_40%)] backdrop-blur-lg border-t border-[color-mix(in_srgb,var(--color-blue-500),transparent_99%)] saturate-150">
             <div className="icon-wrapper">
                 <div className="nav-items">
                     <button 
@@ -72,10 +69,11 @@ export default function NavContent(){
                         className="nav-item"
                         type='button'
                         onClick={() => {
-                            window.location.href = '/';
+                            window.open('https://www.google.com', '_blank');
                         }}
+                        aria-label='google'
                     >
-                        <img src="/images/folder.png"/>
+                        <img src="/images/icons/google.png"/>
                     </button>
                     <button 
                         className="nav-item"
@@ -83,21 +81,22 @@ export default function NavContent(){
                         onClick={() => {
                             window.location.href = '/';
                         }}
+                        aria-label='folder'
                     >
                         <img src="/images/folder.png"/>
                     </button>
                 </div>
                 <span className="widgets-area">
                     <div className="widget-item" style={{padding: '15px 8px', userSelect: 'none', cursor: 'pointer'}} onClick={handleTrayClick}>
-                        <img style={{width: '11px', transform: isRotated ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s'}} src="/images/tray.png"/>
+                        <img style={{width: '11px', transform: isRotated ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s'}} src="/images/tray/tray.png"/>
                     </div>
                     <div className="widget-item">
-                        <img className='invert' src="/images/wifi.png"/>
-                        <img src="/images/volume.png"/>
+                        <img className='invert' src="/images/tray/wifi.png"/>
+                        <img src="/images/tray/volume.png"/>
                     </div>
                     <div className="widget-item" style={{flexDirection: 'column', fontSize: '12px', lineHeight: '1', padding: '6px 8px', textAlign: 'center'}}>
                         <div className="time">
-                            {currentTime} {period}
+                            {currentTime}
                         </div>
                         <div className="date">
                             {currentDate}
@@ -105,7 +104,7 @@ export default function NavContent(){
                     </div>
                 </span>
             </div>
-            <div className='tray' style={{opacity: trayOpen ? '1' : '0', pointerEvents: trayOpen ? 'auto' : 'none', bottom: trayOpen ? '65px' : '55px', transition: trayOpen ? 'bottom 200ms ease-in-out' :'bottom 150ms ease-in-out, opacity 100ms ease-in-out 90ms'}}>
+            <div className='tray bg-[color-mix(in_srgb,var(--color-neutral-800),transparent_10%)] backdrop-blur-3xl border-t border-[color-mix(in_srgb,var(--color-blue-500),transparent_99%)]' style={{opacity: trayOpen ? '1' : '0', pointerEvents: trayOpen ? 'auto' : 'none', bottom: trayOpen ? '65px' : '55px', transition: trayOpen ? 'bottom 200ms ease-in-out' :'bottom 150ms ease-in-out, opacity 100ms ease-in-out 90ms'}}>
                 <span>
                     <button className='trayButton' name='github' onClick={() => {
                             window.open('https://github.com/ConnorKnoetze', '_blank');
