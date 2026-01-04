@@ -20,8 +20,8 @@ export default function NavContent(){
 
         updateDateTime();
 
-        // Update every half-minute (30000ms)
-        const interval = setInterval(updateDateTime, 30000);
+        // Update every 5 seconds (5000ms)
+        const interval = setInterval(updateDateTime, 5000);
 
         return () => clearInterval(interval);
     }, []);
