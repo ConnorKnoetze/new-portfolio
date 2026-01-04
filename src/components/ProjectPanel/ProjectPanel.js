@@ -5,8 +5,10 @@ import "@/styles/ProjectPanel/ProjectPanel.css";
 export default function ProjectPanel(){
     const blacklistedRepos = ["ConnorKnoetze", "Dart_Board"];
     const [repos, setRepos] = useState([]);
+    const [filteredRepos, setFilteredRepos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         async function fetchRepos() {
@@ -31,6 +33,7 @@ export default function ProjectPanel(){
                 const filteredRepos = data.filter(repo => !blacklistedRepos.includes(repo.name));
                 const sortedRepos = filteredRepos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                 setRepos(sortedRepos);
+                setFilteredRepos(sortedRepos);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching repositories:', error);
@@ -41,6 +44,14 @@ export default function ProjectPanel(){
 
         fetchRepos();
     }, []);
+
+    function handleSearch(e) {
+        e.preventDefault();
+        const filtered = repos.filter(repo => 
+            repo.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredRepos(filtered);
+    }
 
     function closeWindow(panelName) {
         const wallpaperPanel = document.querySelector(`.${panelName}-panel-active`);
@@ -76,10 +87,17 @@ export default function ProjectPanel(){
                     <p>Projects</p>
                 </div>
 
-                <div className="search-area">
-                    <input type="text" placeholder="Search Projects"/>
-                    <img src="/images/WindowControls/loupe.png" alt="search icon"/>
-                </div>
+                <form className="search-area" onSubmit={handleSearch}>
+                    <input 
+                        type="text" 
+                        placeholder="Search Projects"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <button type="submit" style={{background: 'none', border: 'none', cursor: 'pointer', padding: 0}}>
+                        <img src="/images/WindowControls/loupe.png" alt="search icon"/>
+                    </button>
+                </form>
 
             </div>
 
@@ -88,7 +106,7 @@ export default function ProjectPanel(){
                 {error && <p style={{color: 'red'}}>{error}</p>}
                 {!loading && !error && (
                     <div id="repo-grid" className="repo-grid">
-                        {repos.map(repo => (
+                        {filteredRepos.map(repo => (
                             <div key={repo.id} className="repo-item">
                                 <button onDoubleClick={() => window.location.href = `/${repo.id}`}>
                                     <img src={'/images/icons/filled_folder.png'} alt={`${repo.name}`} />
