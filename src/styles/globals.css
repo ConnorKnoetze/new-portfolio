@@ -19,6 +19,7 @@ body {
   color: var(--foreground);
   font-family: "Segoe UI Variable", "Segoe UI", Tahoma, "Geneva", Verdana, sans-serif;
   overflow: hidden;
+  transition: background 0.5s ease-in-out;
 }
 
 .app-shell {

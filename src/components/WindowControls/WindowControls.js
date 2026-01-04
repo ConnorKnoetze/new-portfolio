@@ -1,8 +1,10 @@
+'use client';
 import "@/styles/WindowControls/WindowControls.css";
 
-export default function WindowControls(){
-    function closeWindow() {
-        window.location.href = '/';
+export default function WindowControls({ panelName }){
+    function closeWindow(panelName) {
+        const wallpaperPanel = document.querySelector(`.${panelName}-panel-active`);
+        wallpaperPanel.className = `${panelName}-panel`;
     }
     return (
         <div className="window-controls">
@@ -12,7 +14,7 @@ export default function WindowControls(){
             <div className="window-control-button">
                 <img className="window-control-icon" src="/images/WindowControls/stop.png" alt="Minimize Icon"/>
             </div>
-            <div className="window-control-button close" onClick={closeWindow}>
+            <div className="window-control-button close" onClick={() => closeWindow(panelName)}>
                 <img className="window-control-icon" src="/images/WindowControls/close.png" alt="Minimize Icon"/>
             </div>
         </div>
