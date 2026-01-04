@@ -69,6 +69,18 @@ export default function ProjectPanel(){
                 <div className="arrow-image-area invert-50"><img src="/images/arrows/right.png" alt="right arrow" /></div>
                 <div className="arrow-image-area"><img src="/images/arrows/up.png" alt="up arrow" /></div>
                 <div className="arrow-image-area"><img src="/images/arrows/rotate-right.png" alt="rotate right arrow" /></div>
+
+                <div className="file-path-area">
+                    <img src="/images/WindowControls/home.png"/>
+                    <div className="file-path-arrow-image-area"><img style={{width: "10px"}} src="/images/arrows/right-arrow.png"/></div>
+                    <p>Projects</p>
+                </div>
+
+                <div className="search-area">
+                    <input type="text" placeholder="Search Projects"/>
+                    <img src="/images/WindowControls/loupe.png" alt="search icon"/>
+                </div>
+
             </div>
 
             <div className="project-panel-body">
