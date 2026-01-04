@@ -51,16 +51,8 @@
     text-shadow: black 2px 2px 4px;
 }
 
-.wallpaper-panel{
-    display: none;
-    opacity: 0;
-}
-
-.project-panel{
-    display: none;
-    opacity: 0;
-}
-
+.wallpaper-panel,
+.project-panel,
 .about-me-panel{
     display: none;
     opacity: 0;
@@ -77,6 +69,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    backdrop-filter: blur(2px);
 }
 
 

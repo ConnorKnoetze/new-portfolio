@@ -16,6 +16,17 @@
     flex-direction: column;
     color: white;
     font-size: 24px;
+    transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
+}
+
+.wallpaper-panel-content.maximized,
+.about-me-panel-content.maximized,
+.project-panel-content.maximized {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    border-radius: 0;
+    transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
 }
 
 .wallpaper-panel-header,
