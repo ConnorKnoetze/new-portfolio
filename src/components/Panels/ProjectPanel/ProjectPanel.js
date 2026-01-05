@@ -1,8 +1,8 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import WindowControls from "../WindowControls/WindowControls";
-import "@/styles/ProjectPanel/ProjectPanel.css";
+import WindowControls from "../../WindowControls/WindowControls";
+import "@/styles/Panels/ProjectPanel/ProjectPanel.css";
 
 export default function ProjectPanel(){
     const blacklistedRepos = ["ConnorKnoetze", "Dart_Board", "Java-OpenGL-Triangle-LWJGL"];

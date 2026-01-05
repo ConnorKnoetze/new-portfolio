@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 @import "../Panel/Panel.css";
 
 .project-panel-content{

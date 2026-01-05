@@ -12,6 +12,10 @@ function ProjectContent() {
     const [repo, setRepo] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const authHeaders = (() => {
+        const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+        return token ? { Authorization: `Bearer ${token}` } : {};
+    })();
 
     useEffect(() => {
         fetchRepoDetails();
@@ -27,9 +31,7 @@ function ProjectContent() {
     async function fetchRepoDetails() {
         try {
             const response = await fetch(`https://api.github.com/repos/ConnorKnoetze/${name}`, {
-                headers: {
-                    Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
-                },
+                headers: authHeaders,
             });
 
             if (!response.ok) {
@@ -46,41 +48,61 @@ function ProjectContent() {
         }
     }
 
-    if (error) return <div className="project-page"><p style={{color: 'red'}}>Error: {error}</p></div>;
-    if (!repo) return <div className="project-page"></div>;
+    if (error) {
+        return (
+            <div className="project-page">
+                <div className="project-shell">
+                    <p className="project-error">Error: {error}</p>
+                </div>
+            </div>
+        );
+    }
+
+    if (loading || !repo) {
+        return (
+            <div className="project-page">
+                <div className="project-shell">
+                    <p className="project-muted">Loading project…</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="project-page">
-            <div className='project-page-content'>
-                <div className='image-carousel-panel'>
-                    <ImageCarousel repoName={repo.name}/>
-                </div>
-                <div className='details-panel'>
-                    <h1>{repo.name}</h1>
-                    <p>{repo.description || 'No description available'}</p>
-                    <div className="project-stats">
-                        <span>⭐ {repo.stargazers_count}</span>
-                        <span> | </span>
-                        <span>🍴 {repo.forks_count}</span>
-                        <span> | </span>
-                        <span>👁️ {repo.watchers_count}</span>
-                    </div>
-                    <div className="project-meta">
-                        <p><strong>Language:</strong> {repo.language || 'N/A'}</p>
-                        <p><strong>Created:</strong> {new Date(repo.created_at).toLocaleDateString()}</p>
-                        <p><strong>Updated:</strong> {new Date(repo.updated_at).toLocaleDateString()}</p>
-                    </div>
-                    {repo.topics && repo.topics.length > 0 && (
-                        <div className="project-topics">
-                            <strong>Topics:</strong>
-                            {repo.topics.map(topic => (
-                                <span key={topic} className="topic-tag">{topic}</span>
-                            ))}
+            <div className="project-shell">
+                <header className="project-shell-header">
+                    <div>
+                        <p className="project-eyebrow">Project detail</p>
+                        <h1 className="project-title">{repo.name}</h1>
+                        <p className="project-lede">{repo.description || 'No description available'}</p>
+                        <div className="project-meta-inline">
+                            <span><strong>Language:</strong> {repo.language || 'N/A'}</span>
+                            <span><strong>Created:</strong> {new Date(repo.created_at).toLocaleDateString()}</span>
+                            <span><strong>Updated:</strong> {new Date(repo.updated_at).toLocaleDateString()}</span>
                         </div>
-                    )}
-                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="github-link">
+                    </div>
+                    <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className="project-cta primary">
                         View on GitHub →
                     </a>
+                </header>
+
+                <div className='project-shell-body'>
+                    <div className='project-card image-card'>
+                        <div className="project-card-label">Gallery</div>
+                        <ImageCarousel repoName={repo.name}/>
+                    </div>
+
+                    {repo.topics && repo.topics.length > 0 && (
+                        <div className='project-card topics-card'>
+                            <div className="project-card-label">Topics</div>
+                            <div className="topic-chips">
+                                {repo.topics.map(topic => (
+                                    <span key={topic} className="topic-tag">{topic}</span>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

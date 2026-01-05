@@ -53,14 +53,16 @@
 
 .wallpaper-panel,
 .project-panel,
-.about-me-panel{
+.about-me-panel,
+.welcome-panel {
     display: none;
     opacity: 0;
 }
 
 .wallpaper-panel-active, 
 .project-panel-active,
-.about-me-panel-active {
+.about-me-panel-active,
+.welcome-panel-active {
     display: block;
     position: fixed;
     opacity: 1;
