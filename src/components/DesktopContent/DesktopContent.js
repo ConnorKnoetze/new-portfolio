@@ -2,9 +2,10 @@
 
 import "@/styles/Desktop/Desktop.css";
 import { useState } from 'react';
-import WallpaperPanel from "@/components/WallpaperPanel/WallpaperPanel";
-import ProjectPanel from "../ProjectPanel/ProjectPanel";
-import AboutMePanel from "../AboutMePanel/AboutMePanel";
+import WallpaperPanel from "@/components/Panels/WallpaperPanel/WallpaperPanel";
+import ProjectPanel from "../Panels/ProjectPanel/ProjectPanel";
+import AboutMePanel from "../Panels/AboutMePanel/AboutMePanel";
+import WelcomePanel from "../Panels/WelcomePanel/WelcomePanel";
 
 export default function DesktopContent(){
     const [clickedItem, setClickedItem] = useState(null);
@@ -31,6 +32,10 @@ export default function DesktopContent(){
     return (
         <div className="desktop-content">
             <div className="icon-grid" onClick={clearHighlight}>
+                <div className="icon-item" onClick={doClickHighlight} onDoubleClick={() => togglePanel('welcome')}>
+                    <img src="/images/icons/Windows_Notepad_icon.png" alt="Home Icon" className="icon-image"/>
+                    <span className="icon-label">Welcome!</span>
+                </div>
                 <div className="icon-item" onClick={doClickHighlight} onDoubleClick={() => togglePanel('about-me')}>
                     <img src="/images/icons/pdf.png" alt="Home Icon" className="icon-image"/>
                     <span className="icon-label">About Me</span>
@@ -43,6 +48,10 @@ export default function DesktopContent(){
                     <img src="/images/icons/photos.png" alt="Home Icon" className="icon-image"/>
                     <span className="icon-label">Wallpapers</span>
                 </div>
+            </div>
+
+            <div className="welcome-panel-active" name="welcome" onClick={() => togglePanel('welcome')}>
+                <WelcomePanel/>
             </div>
 
             <div className="about-me-panel" name="about-me" onClick={() => togglePanel('about-me')}>

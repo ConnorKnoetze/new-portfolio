@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 @import "../Panel/Panel.css";
 
 .project-panel-content{
@@ -72,6 +74,13 @@
     display:flex;
     flex-direction: row;
     background-color: rgba(255, 255, 255, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+    align-items: stretch;
+}
+
+.project-panel-controls > * {
+    flex: 1 1 0;
 }
 
 .arrow-image-area {
@@ -85,11 +94,80 @@
     align-items: center;
     cursor: pointer;
     transition: background-color 70ms ease-in-out;
+    flex: 0 0 auto;
 }
 
 .arrow-image-area img {
     width: 14px;
     filter: invert(100);
+}
+
+.file-path-area {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 3px 12px;
+    gap: 2px;
+    margin: 8px 0px 8px 0px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    flex: 3 1 0;
+}
+
+.file-path-area img {
+    width: 18px;
+    filter: invert(80%);
+}
+
+.file-path-area p {
+    font-size: 14px;
+    color: var(--foreground);
+}
+
+.search-area {
+    margin: 8px;
+    padding: 4px 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    flex: 1 1 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 120ms ease-in-out;
+}
+
+.search-area:focus-within {
+    border-color: #e63946;
+}
+
+.search-area input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--foreground);
+    font-size: 14px;
+    flex: 1;
+}
+
+.search-area img {
+    position: relative;
+    right: 5px;
+    width: 12px;
+    filter: invert(80%);
+}
+
+.file-path-arrow-image-area {
+    width: 25px;
+    height: 25px;
+    margin: 0 8px;
+    padding: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 6px;
 }
 
 .repo-grid {
@@ -140,6 +218,10 @@
     }
 
     .arrow-image-area:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+        transition: background-color 70ms ease-in-out;
+    }
+    .file-path-arrow-image-area:hover {
         background-color: rgba(255, 255, 255, 0.05);
         transition: background-color 70ms ease-in-out;
     }

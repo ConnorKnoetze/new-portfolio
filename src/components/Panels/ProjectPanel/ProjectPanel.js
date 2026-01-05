@@ -1,12 +1,16 @@
+'use client';
+
 import { useEffect, useState } from "react";
-import WindowControls from "../WindowControls/WindowControls";
-import "@/styles/ProjectPanel/ProjectPanel.css";
+import WindowControls from "../../WindowControls/WindowControls";
+import "@/styles/Panels/ProjectPanel/ProjectPanel.css";
 
 export default function ProjectPanel(){
-    const blacklistedRepos = ["ConnorKnoetze", "Dart_Board"];
+    const blacklistedRepos = ["ConnorKnoetze", "Dart_Board", "Java-OpenGL-Triangle-LWJGL"];
     const [repos, setRepos] = useState([]);
+    const [filteredRepos, setFilteredRepos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         async function fetchRepos() {
@@ -31,6 +35,7 @@ export default function ProjectPanel(){
                 const filteredRepos = data.filter(repo => !blacklistedRepos.includes(repo.name));
                 const sortedRepos = filteredRepos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                 setRepos(sortedRepos);
+                setFilteredRepos(sortedRepos);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching repositories:', error);
@@ -42,9 +47,24 @@ export default function ProjectPanel(){
         fetchRepos();
     }, []);
 
+    function handleSearch(e) {
+        e.preventDefault();
+        const filtered = repos.filter(repo => 
+            repo.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredRepos(filtered);
+    }
+
     function closeWindow(panelName) {
         const wallpaperPanel = document.querySelector(`.${panelName}-panel-active`);
         wallpaperPanel.className = `${panelName}-panel`;
+    }
+
+    function getCurrentWallpaper() {
+        const bodyStyles = window.getComputedStyle(document.body);
+        const backgroundImage = bodyStyles.getPropertyValue('background-image');
+        const match = backgroundImage.match(/wallpapers\/(.*?)"/);
+        return match ? match[1] : 'default.jpg';
     }
 
     return (
@@ -69,6 +89,24 @@ export default function ProjectPanel(){
                 <div className="arrow-image-area invert-50"><img src="/images/arrows/right.png" alt="right arrow" /></div>
                 <div className="arrow-image-area"><img src="/images/arrows/up.png" alt="up arrow" /></div>
                 <div className="arrow-image-area"><img src="/images/arrows/rotate-right.png" alt="rotate right arrow" /></div>
+
+                <div className="file-path-area">
+                    <img src="/images/WindowControls/home.png"/>
+                    <div className="file-path-arrow-image-area"><img style={{width: "10px"}} src="/images/arrows/right-arrow.png"/></div>
+                    <p>Projects</p>
+                </div>
+
+                <form className="search-area" onSubmit={handleSearch}>
+                    <input 
+                        type="text" 
+                        placeholder="Search Projects"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    <button type="submit" style={{background: 'none', border: 'none', cursor: 'pointer', padding: 0}}>
+                        <img src="/images/WindowControls/loupe.png" alt="search icon"/>
+                    </button>
+                </form>
             </div>
 
             <div className="project-panel-body">
@@ -76,9 +114,9 @@ export default function ProjectPanel(){
                 {error && <p style={{color: 'red'}}>{error}</p>}
                 {!loading && !error && (
                     <div id="repo-grid" className="repo-grid">
-                        {repos.map(repo => (
+                        {filteredRepos.map(repo => (
                             <div key={repo.id} className="repo-item">
-                                <button onDoubleClick={() => window.location.href = `/${repo.id}`}>
+                                <button onDoubleClick={() => window.location.href = `/project?name=${repo.name}&w=${getCurrentWallpaper()}`} className="repo-button">
                                     <img src={'/images/icons/filled_folder.png'} alt={`${repo.name}`} />
                                     <p>{repo.name}</p>
                                 </button>
