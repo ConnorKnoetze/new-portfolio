@@ -1,0 +1,121 @@
+.project-page {
+    padding: 0 1ch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 99%;
+    overflow-y: auto;
+}
+
+.project-page-content {
+    display: flex;
+    max-width: 1920px;
+    gap: 1rem;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.image-carousel-panel {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 300px;
+    max-height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.details-panel {
+    flex: 1;
+    min-width: 400px;
+    max-height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    overflow-y: auto;
+}
+
+.details-panel h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.details-panel p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.project-stats {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.project-meta {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+}
+
+.project-meta p {
+    margin-bottom: 0.5rem;
+}
+
+.project-meta strong {
+    color: rgba(255, 255, 255, 0.95);
+    margin-right: 0.5rem;
+}
+
+.project-topics {
+    margin: 1.5rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.project-topics strong {
+    color: rgba(255, 255, 255, 0.95);
+    margin-right: 0.5rem;
+}
+
+.topic-tag {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.github-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    transition: all 0.2s;
+}
+
+.github-link:hover {
+    background: rgba(59, 130, 246, 0.3);
+    border-color: rgba(59, 130, 246, 0.5);
+}
+
+/* Loading and error states */
+.project-page p {
+    color: rgba(255, 255, 255, 0.8);
+}

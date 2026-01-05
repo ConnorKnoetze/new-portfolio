@@ -1,6 +1,7 @@
+'use client';
+
 import WindowControls from "../WindowControls/WindowControls";
 import "@/styles/AboutMePanel/AboutMePanel.css";
-
 
 export default function AboutMePanel(){
     return (

@@ -1,6 +1,7 @@
 'use client'
 // import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react';
+import { getCurrentWallpaper } from '@/utils/getCurrentWallpaper';
 
 export default function NavContent(){
     const [currentTime, setCurrentTime] = useState('');
@@ -40,7 +41,7 @@ export default function NavContent(){
                         className="nav-item"
                         type='button'
                         onClick={() => {
-                            window.location.href = '/';
+                            window.location.href = `/desktop?w=${getCurrentWallpaper()}`;
                         }}
                     >
                         <svg
@@ -79,7 +80,7 @@ export default function NavContent(){
                         className="nav-item"
                         type='button'
                         onClick={() => {
-                            window.location.href = '/';
+                            window.location.href = `/desktop?w=${getCurrentWallpaper()}`;
                         }}
                         aria-label='folder'
                     >

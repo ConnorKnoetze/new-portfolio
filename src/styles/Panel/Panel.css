@@ -6,10 +6,10 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -52.5%);
     width: 80%;
     max-width: 99rem;
-    height: 80%;
+    height: 85%;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -24,6 +24,7 @@
 .project-panel-content.maximized {
     width: 100vw;
     height: 100vh;
+    transform: translate(-50%, -50%);
     max-width: none;
     border-radius: 0;
     transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;

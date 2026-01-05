@@ -1,4 +1,7 @@
+'use client';
+
 import WindowControls from "../WindowControls/WindowControls";
+import setAsWallpaper from "@/utils/setAsWallpaper";
 import "@/styles/WallpaperPanel/WallpaperPanel.css";
 
 const wallpaperFiles = [
@@ -16,12 +19,6 @@ const wallpaperFiles = [
 ];
 
 export default function WallpaperPanel(){
-
-    function setAsWallpaper(wallpaperFileName) {
-        const backgroundUrl = `url('/images/wallpapers/${wallpaperFileName}')`;
-        document.documentElement.style.setProperty('--background', backgroundUrl);
-    }
-
     return (
         <div className="wallpaper-panel-content" onClick={(e) => e.stopPropagation()}>
             <div className="wallpaper-panel-header">
