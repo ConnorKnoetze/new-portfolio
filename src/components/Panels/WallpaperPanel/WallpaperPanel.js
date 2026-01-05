@@ -1,8 +1,8 @@
 'use client';
 
-import WindowControls from "../WindowControls/WindowControls";
+import WindowControls from "../../WindowControls/WindowControls";
 import setAsWallpaper from "@/utils/setAsWallpaper";
-import "@/styles/WallpaperPanel/WallpaperPanel.css";
+import "@/styles/Panels/WallpaperPanel/WallpaperPanel.css";
 
 const wallpaperFiles = [
     ["Screenshot 2026-01-04 154925.png", "2f88vbbi9kue195.png"],

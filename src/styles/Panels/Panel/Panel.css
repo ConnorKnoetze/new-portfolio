@@ -2,7 +2,8 @@
 
 .wallpaper-panel-content,
 .about-me-panel-content,
-.project-panel-content {
+.project-panel-content,
+.welcome-panel-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -21,7 +22,8 @@
 
 .wallpaper-panel-content.maximized,
 .about-me-panel-content.maximized,
-.project-panel-content.maximized {
+.project-panel-content.maximized,
+.welcome-panel-content.maximized {
     width: 100vw;
     height: 100vh;
     transform: translate(-50%, -50%);
@@ -32,14 +34,16 @@
 
 .wallpaper-panel-header,
 .about-me-panel-header,
-.project-panel-header {
+.project-panel-header,
+.welcome-panel-header {
     height: 38px;
     width: 100%;
 }
 
 .wallpaper-panel-body,
 .about-me-panel-body,
-.project-panel-body {
+.project-panel-body,
+.welcome-panel-body {
     flex: 1;
-    padding: 16px;
+    padding: 5px 16px 16px 16px;
 }
