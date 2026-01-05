@@ -1,9 +1,11 @@
+'use client';
+
 import { useEffect, useState } from "react";
 import WindowControls from "../WindowControls/WindowControls";
 import "@/styles/ProjectPanel/ProjectPanel.css";
 
 export default function ProjectPanel(){
-    const blacklistedRepos = ["ConnorKnoetze", "Dart_Board"];
+    const blacklistedRepos = ["ConnorKnoetze", "Dart_Board", "Java-OpenGL-Triangle-LWJGL"];
     const [repos, setRepos] = useState([]);
     const [filteredRepos, setFilteredRepos] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -58,6 +60,13 @@ export default function ProjectPanel(){
         wallpaperPanel.className = `${panelName}-panel`;
     }
 
+    function getCurrentWallpaper() {
+        const bodyStyles = window.getComputedStyle(document.body);
+        const backgroundImage = bodyStyles.getPropertyValue('background-image');
+        const match = backgroundImage.match(/wallpapers\/(.*?)"/);
+        return match ? match[1] : 'default.jpg';
+    }
+
     return (
         <div className="project-panel-content" onClick={(e) => e.stopPropagation()}>
             <div className="project-panel-header">
@@ -98,7 +107,6 @@ export default function ProjectPanel(){
                         <img src="/images/WindowControls/loupe.png" alt="search icon"/>
                     </button>
                 </form>
-
             </div>
 
             <div className="project-panel-body">
@@ -108,7 +116,7 @@ export default function ProjectPanel(){
                     <div id="repo-grid" className="repo-grid">
                         {filteredRepos.map(repo => (
                             <div key={repo.id} className="repo-item">
-                                <button onDoubleClick={() => window.location.href = `/${repo.id}`}>
+                                <button onDoubleClick={() => window.location.href = `/project?name=${repo.name}&w=${getCurrentWallpaper()}`} className="repo-button">
                                     <img src={'/images/icons/filled_folder.png'} alt={`${repo.name}`} />
                                     <p>{repo.name}</p>
                                 </button>

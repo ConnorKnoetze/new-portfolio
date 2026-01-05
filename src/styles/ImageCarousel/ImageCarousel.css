@@ -1,0 +1,8 @@
+.images-area {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 88vh;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
