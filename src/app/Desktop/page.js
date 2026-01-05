@@ -1,21 +1,11 @@
-'use client';
-import { useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import DesktopContent from '@/components/DesktopContent/DesktopContent'
-import setAsWallpaper from '@/utils/setAsWallpaper';
+import DesktopWithSearchParams from '@/components/DesktopContent/DesktopWithSearchParams';
 
 export default function Desktop(){
-    const searchParams = useSearchParams();
-    const wallpaper = searchParams.get('w');
-
-    useEffect(() => {
-        if (wallpaper) {
-            setAsWallpaper(wallpaper);
-            window.history.replaceState({}, document.title, window.location.pathname);
-        }
-    }, [wallpaper]);
-
-    
-    
-    return <DesktopContent/>
+    return (
+        <Suspense fallback={<DesktopContent />}>
+            <DesktopWithSearchParams />
+        </Suspense>
+    );
 }
